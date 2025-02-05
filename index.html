@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicat Qasimov - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .phone {
+            width: 350px;
+            height: 700px;
+            background: #000;
+            border-radius: 40px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        .screen {
+            background: #1a1a1a;
+            height: 100%;
+            border-radius: 20px;
+            padding: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notch {
+            width: 60%;
+            height: 25px;
+            background: #000;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 0 0 15px 15px;
+            z-index: 2;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 15px;
+            color: white;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .home-indicator {
+            width: 120px;
+            height: 4px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 2px;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin: 20px 0 10px 0;
+            font-size: 24px;
+            line-height: 1.3;
+        }
+
+        h1 .subtitle {
+            display: block;
+            font-size: 18px;
+            color: #aaa;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+
+        .folders {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .folder {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .folder:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .content {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            right: 0;
+            bottom: 50px;
+            background: #1a1a1a;
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 2;
+        }
+
+        .content:target {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Mobile Responsive Styles */
+        @media only screen and (max-width: 600px) {
+            body {
+                background: #1a1a1a;
+                display: block;
+            }
+
+            .phone {
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+
+            .screen {
+                border-radius: 0;
+            }
+
+            .notch,
+            .home-indicator {
+                display: none;
+            }
+
+            .content {
+                top: 0;
+                bottom: 0;
+            }
+        }
+
+        .content::-webkit-scrollbar {
+            width: 8px; /* Width of the scrollbar */
+        }
+    
+        .content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1); /* Track color */
+            border-radius: 4px;
+        }
+    
+        .content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3); /* Thumb color */
+            border-radius: 4px;
+        }
+    
+        .content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5); /* Thumb color on hover */
+        }
+
+        .contact-container {
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+    
+        .contact-container p {
+            margin: 10px 0;
+        }
+    
+        .contact-container a {
+            color: #ff4d4d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    
+        .social-icons {
+            margin-top: 20px;
+        }
+    
+        .social-icons a {
+            display: inline-block;
+            margin: 0 15px;
+            font-size: 32px; /* Increased icon size */
+            color: white;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+    
+        /* Hover effects for social icons */
+        .social-icons a:hover {
+            transform: scale(1.3);
+        }
+    
+        .linkedin:hover {
+            color: #0077b5;
+        }
+    
+        .github:hover {
+            color: #6e5494;
+        }
+    
+        .twitter:hover {
+            color: #1da1f2;
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="phone">
+        <div class="notch"></div>
+        <div class="screen" id="main">
+            <div class="status-bar">
+                <div class="time">9:41</div>
+                <div class="battery">
+                    <span>100%</span>
+                    <svg width="20" height="10" viewBox="0 0 20 10">
+                        <path fill="#fff" d="M1 3V1h16v8H1V7h14V3H1z"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <h1>Nijat Gasimov
+                <span class="subtitle">Backend Developer</span>
+            </h1>
+            
+            <div class="folders">
+                <a href="#education" class="folder">📁<br>Education</a>
+                <a href="#experience" class="folder">📁<br>Experience</a>
+                <a href="#projects" class="folder">📁<br>Projects</a>
+                <a href="#skills" class="folder">📁<br>Skills</a>
+                <a href="#readme" class="folder">
+                    <i class="fa-solid fa-circle-info"></i><br>README
+                </a>
+                <a href="#contact" class="folder">
+                    <i class="fa-solid fa-envelope"></i><br>Contact Me!
+                </a>
+            </div>
+
+            <div class="home-indicator"></div>
+
+            <!-- Content Sections -->
+            <div class="content" id="education">
+                <a href="#main" class="back-btn">← Back</a>
+                <h2><strong>🎓 Education</strong></h2><p>&nbsp;</p><p>🎓 <strong>Bachelor’s Degree in Computer Science</strong> – <i>French-Azerbaijani University (UFAZ)</i> (2021 – 2025)</p><p><br>📚 <strong>Full Stack Web Development (React, Python Flask)</strong> – <i>Holberton School</i> (Feb 2024 – Present)</p><p><br>🔐 <strong>Cryptography Training</strong> – <i>ROCENERA Cryptographic Innovations Teaching Service</i> (Dec 2024)</p>
+            </div>
+
+            <div class="content" id="experience">
+                <a href="#main" class="back-btn">← Back</a>
+                <h2><strong>💼 Experience</strong></h2><p>&nbsp;</p><p>👨‍💻 <strong>Backend Developer | 166 Tech</strong> <i>(Sep 2024 – Present)</i><br>🔹 Developed <strong>RESTful APIs</strong> using Laravel<br>🔹 Worked with <strong>MySQL</strong>, ensuring optimized queries and data integrity<br>🔹 Applied <strong>MVC architecture</strong>, authentication, and authorization<br>🔹 Collaborated with front-end developers for seamless API integration</p><p>&nbsp;</p><p>🖥 <strong>IT Support Intern | Yelo Bank</strong> <i>(May 2022 – Aug 2022)</i><br>🔹 Resolved technical issues for employees<br>🔹 Assisted in setting up hardware and software systems</p><p>&nbsp;</p><p>📊 <strong>Project Manager Intern | "Irəli" Youth Organization</strong> <i>(Nov 2023)</i><br>🔹 Used <strong>Jira</strong> for task tracking and reporting<br>🔹 Managed project timelines and stakeholder communication</p>
+            </div>
+
+            <div class="content" id="projects">
+                <a href="#main" class="back-btn">← Back</a>
+                <h2><strong>🚀 Projects</strong></h2><p>&nbsp;</p><p>💬 <strong>Live Time Chat Application</strong> – Built with <strong>Laravel, Laravel Echo, and Pusher</strong> for real-time messaging</p><p><br>📧 <strong>Automatic Email Sender</strong> – Developed in <strong>Python</strong> with advanced email automation</p><p><br>🛠 <strong>Automated Admin Panel Creator</strong> – Built with <strong>Laravel (PHP)</strong>, featuring <strong>user management, CRUD, and RBAC</strong></p><p><br>🔗 <strong>EncryptoVote</strong> – Blockchain-based voting system using <strong>Web3, Laravel, and PHP</strong></p><p><br>🌐 <strong>ZafarRun</strong> <i>(Fully Dynamic Website Backend &nbsp;(166) – API)</i> → <a href="http://zafarrunclub.az/">Live Preview</a></p><p><br>🛒 <strong>Emkotech</strong> <i>(E-commerce Web Project (166) – API)</i> → <a href="https://emkotech.vercel.app/">Live Preview</a></p><p>&nbsp;</p><p>🛒 <strong>Cosmoline </strong><i>(E-commerce Fully Dynamic Web Project (166) – MVC)</i> → <a href="https://previsionra.com/">Live Preview</a></p>
+            </div>
+
+            <div class="content" id="skills">
+                <a href="#main" class="back-btn">← Back</a>
+                <h2><strong>🛠 Skills</strong></h2><p>&nbsp;</p><p>✅ <strong>Programming Languages:</strong> PHP, Python</p><p><br>✅ <strong>Frameworks &amp; Tools:</strong> Laravel, Livewire.js, Flask</p><p><br>✅ <strong>Databases:</strong> MySQL, SQL, Database Optimization</p><p><br>✅ <strong>Core Concepts:</strong> Object-Oriented Programming (OOP), Cryptography, API Development, RESTful APIs</p><p><br>✅ <strong>Quality Assurance:</strong> Testing, Debugging, Software Optimization</p>
+            </div>
+
+            <div class="content" id="readme">
+                <a href="#main" class="back-btn">← Back</a>
+                <h2><i class="fa-solid fa-circle-info"></i> README</h2>
+                <br>
+                <p>
+                    This portfolio created by me as dynamic using <strong>Laravel</strong> and <strong>Livewire JS</strong>.
+                    To view the source code of project, please 
+                    <a style="color:red" href="/admin" target="_blank">click here</a>.
+                </p>
+            </div>
+
+            <div class="content" id="contact">
+                <a href="#main" class="back-btn">← Back</a>
+                <h2><i class="fa-solid fa-envelope"></i> Contact Me</h2>
+                <br>
+                <div class="contact-container">
+                    <p>📧 <strong>Email:</strong> <a href="mailto:nicat@example.com">nijatt.gasimov@gmail.com</a></p>
+                    <p>📍 <strong>Location:</strong> Baku, Azerbaijan</p>
+                    
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/qmov-nicat/" target="_blank" class="linkedin">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Nicatqmov" target="_blank" class="github">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function updateTime() {
+            const timeElement = document.querySelector('.time');
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            
+            // Format time to always be two digits
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+    
+            timeElement.textContent = `${hours}:${minutes}`;
+        }
+    
+        // Update time every second
+        setInterval(updateTime, 1000);
+    
+        // Initialize time when page loads
+        updateTime();
+    </script>
+</body>
+</html>
